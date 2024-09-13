@@ -20,8 +20,6 @@ public class Main {
         v1.setLocationRelativeTo(null);
         v1.setTitle("manage students");
         v1.setVisible(true);
-        
-        Connection con =  DBConnection.getInstance().getConnection();
     }
     
 }
