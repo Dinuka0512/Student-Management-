@@ -4,6 +4,8 @@
  */
 package studentmanagement.edu.ijse;
 import studentmanagement.edu.ijse.view.StudentManageView;
+import studentmanagement.Database.DBConnection;
+import java.sql.Connection;
 /**
  *
  * @author dinuka
@@ -18,7 +20,8 @@ public class Main {
         v1.setLocationRelativeTo(null);
         v1.setTitle("manage students");
         v1.setVisible(true);
-        //526 377
+        
+        Connection con =  DBConnection.getInstance().getConnection();
     }
     
 }
