@@ -1,0 +1,11 @@
+Create database StudentManage;
+use StudentManage;
+
+Create Table Student(
+	stuId VARCHAR(255) PRIMARY KEY,
+	name VARCHAR(255) NOT NULL,
+	Address VARCHAR(255) NOT NULL,
+	grade INT NOT NULL
+);
+
+desc Student;
