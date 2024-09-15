@@ -51,4 +51,23 @@ public class StudentModel {
         int result = stm.executeUpdate();
         return result > 0 ? "Successfully Saved" : "Fail";
     }
+    
+    public List<StudentDto> searchStudent(String Id) throws ClassNotFoundException, SQLException{
+        Connection connection = DBConnection.getInstance().getConnection();
+        
+        String queree = "SELECT * FROM Student WHERE stuId LIKE '?%'";
+        PreparedStatement statement = connection.prepareCall(queree);
+        
+        statement.setString(1, Id);
+        
+        List<StudentDto> customerDtos = new ArrayList<>();
+        
+        ResultSet rst = statement.executeQuery();
+        while(rst.next()){
+            StudentDto dto = new StudentDto(rst.getString(1),rst.getString(2),rst.getString(3),rst.getInt(4));
+            customerDtos.add(dto);
+        }
+        
+        return customerDtos;
+    }
 }

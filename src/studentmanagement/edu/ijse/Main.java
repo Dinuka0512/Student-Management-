@@ -4,8 +4,6 @@
  */
 package studentmanagement.edu.ijse;
 import studentmanagement.edu.ijse.view.StudentManageView;
-import studentmanagement.Database.DBConnection;
-import java.sql.Connection;
 /**
  *
  * @author dinuka

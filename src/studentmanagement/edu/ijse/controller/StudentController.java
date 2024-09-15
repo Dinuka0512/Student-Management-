@@ -23,4 +23,9 @@ public class StudentController {
         List<StudentDto> dtos = studentmodel.getAllStudents();
         return dtos;
     }
+    
+    public List<StudentDto> searchStudentsController(String id) throws ClassNotFoundException, SQLException{
+        List<StudentDto> dto = studentmodel.searchStudent(id);
+        return dto;
+    }
 }
