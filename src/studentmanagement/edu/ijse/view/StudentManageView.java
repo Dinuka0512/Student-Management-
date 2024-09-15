@@ -35,7 +35,7 @@ public class StudentManageView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnAddStu = new javax.swing.JButton();
         btnSearchStudent = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnUpdateStudent = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -83,9 +83,14 @@ public class StudentManageView extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(102, 102, 102));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Update student");
+        btnUpdateStudent.setBackground(new java.awt.Color(102, 102, 102));
+        btnUpdateStudent.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateStudent.setText("Update student");
+        btnUpdateStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateStudentActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(102, 102, 102));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -106,7 +111,7 @@ public class StudentManageView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnAddStu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnSearchStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+            .addComponent(btnUpdateStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
@@ -122,7 +127,7 @@ public class StudentManageView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSearchStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdateStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
@@ -186,6 +191,16 @@ public class StudentManageView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchStudentActionPerformed
 
+    private void btnUpdateStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStudentActionPerformed
+        try {
+            updateStudentPanel();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StudentManageView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentManageView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnUpdateStudentActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -193,7 +208,7 @@ public class StudentManageView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddStu;
     private javax.swing.JButton btnSearchStudent;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnUpdateStudent;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -217,6 +232,15 @@ public class StudentManageView extends javax.swing.JFrame {
            SearchStuPanelView searchstudentpanel = new SearchStuPanelView();
            searchstudentpanel.setSize(panel.getWidth(), panel.getHeight());
            panel.add(searchstudentpanel);
+           panel.repaint();
+           panel.revalidate();
+    }
+    
+    public void updateStudentPanel() throws ClassNotFoundException, SQLException{
+        panel.removeAll();
+           UpdateStudentPanelView updateStudent = new UpdateStudentPanelView();
+           updateStudent.setSize(panel.getWidth(), panel.getHeight());
+           panel.add(updateStudent);
            panel.repaint();
            panel.revalidate();
     }
