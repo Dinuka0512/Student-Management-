@@ -88,4 +88,15 @@ public class StudentModel {
         int resp = statement.executeUpdate();
         return (resp != 0)? true : false;
     }
+    
+    public boolean deleteStudent(String id) throws ClassNotFoundException, SQLException{
+        String queree = "DELETE FROM Student WHERE stuId = ?";
+        Connection connection = DBConnection.getInstance().getConnection();
+        
+        PreparedStatement stm = connection.prepareStatement(queree);
+        stm.setString(1, id);
+        
+        int resp = stm.executeUpdate();
+        return (resp != 0)? true : false;
+    }
 }

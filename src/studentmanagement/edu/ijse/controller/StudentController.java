@@ -33,4 +33,9 @@ public class StudentController {
         boolean resp = studentmodel.updateStudent(dto);
         return resp;
     }
+    
+    public boolean deleteStudent(String id) throws ClassNotFoundException, SQLException{
+        boolean resp = studentmodel.deleteStudent(id);
+        return resp;
+    }
 }

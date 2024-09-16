@@ -36,7 +36,7 @@ public class StudentManageView extends javax.swing.JFrame {
         btnAddStu = new javax.swing.JButton();
         btnSearchStudent = new javax.swing.JButton();
         btnUpdateStudent = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         panel = new javax.swing.JPanel();
@@ -92,9 +92,14 @@ public class StudentManageView extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(102, 102, 102));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Delete Student");
+        btnDelete.setBackground(new java.awt.Color(102, 102, 102));
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setText("Delete Student");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 10)); // NOI18N
@@ -112,7 +117,7 @@ public class StudentManageView extends javax.swing.JFrame {
             .addComponent(btnAddStu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnSearchStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
             .addComponent(btnUpdateStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +134,7 @@ public class StudentManageView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUpdateStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,15 +206,25 @@ public class StudentManageView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnUpdateStudentActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        try {
+            deleteStudentPanel();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StudentManageView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentManageView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddStu;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearchStudent;
     private javax.swing.JButton btnUpdateStudent;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -241,6 +256,15 @@ public class StudentManageView extends javax.swing.JFrame {
            UpdateStudentPanelView updateStudent = new UpdateStudentPanelView();
            updateStudent.setSize(panel.getWidth(), panel.getHeight());
            panel.add(updateStudent);
+           panel.repaint();
+           panel.revalidate();
+    }
+    
+    public void deleteStudentPanel() throws ClassNotFoundException, SQLException{
+        panel.removeAll();
+           DeleteStudentPanelView deleteStudent = new DeleteStudentPanelView();
+           deleteStudent.setSize(panel.getWidth(), panel.getHeight());
+           panel.add(deleteStudent);
            panel.repaint();
            panel.revalidate();
     }
