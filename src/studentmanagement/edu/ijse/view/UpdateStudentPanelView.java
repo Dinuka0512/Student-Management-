@@ -228,17 +228,21 @@ public class UpdateStudentPanelView extends javax.swing.JPanel {
         txtGrade.setText(Integer.toString(grade));
     }
     private void updateStudent() throws ClassNotFoundException, SQLException{
-        StudentDto studentdto = new StudentDto(labelId.getText(),
-            txtName.getText(),
-            txtAddress.getText(),
-            Integer.parseInt(txtGrade.getText())
-        );
-
-        boolean resp = studentController.updateStudent(studentdto);
-        if(resp == true){
-            JOptionPane.showMessageDialog(this, "Saved successfully");
+        if(txtName.getText().equals("") && txtAddress.getText().equals("") && txtGrade.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Frist you need to select the row what you need to update!");
         }else{
-            JOptionPane.showMessageDialog(this, "Save Faild");
+            StudentDto studentdto = new StudentDto(labelId.getText(),
+                txtName.getText(),
+                txtAddress.getText(),
+                Integer.parseInt(txtGrade.getText())
+            );
+
+            boolean resp = studentController.updateStudent(studentdto);
+            if(resp == true){
+                JOptionPane.showMessageDialog(this, "Saved successfully");
+            }else{
+                JOptionPane.showMessageDialog(this, "Save Faild");
+            }
         }
     }   
     
