@@ -28,4 +28,9 @@ public class StudentController {
         StudentDto dto = studentmodel.searchStudent(id);
         return dto;
     }
+    
+    public boolean updateStudent(StudentDto dto) throws ClassNotFoundException, SQLException{
+        boolean resp = studentmodel.updateStudent(dto);
+        return resp;
+    }
 }

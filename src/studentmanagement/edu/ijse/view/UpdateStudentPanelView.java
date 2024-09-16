@@ -5,6 +5,8 @@
 package studentmanagement.edu.ijse.view;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import studentmanagement.edu.ijse.dto.StudentDto;
@@ -35,7 +37,6 @@ public class UpdateStudentPanelView extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -43,9 +44,10 @@ public class UpdateStudentPanelView extends javax.swing.JPanel {
         txtGrade = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         clear = new javax.swing.JButton();
-        save = new javax.swing.JButton();
+        update = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        labelId = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -87,12 +89,12 @@ public class UpdateStudentPanelView extends javax.swing.JPanel {
             }
         });
 
-        save.setBackground(new java.awt.Color(102, 102, 255));
-        save.setForeground(new java.awt.Color(255, 255, 255));
-        save.setText("Save");
-        save.addActionListener(new java.awt.event.ActionListener() {
+        update.setBackground(new java.awt.Color(102, 102, 255));
+        update.setForeground(new java.awt.Color(255, 255, 255));
+        update.setText("Update");
+        update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveActionPerformed(evt);
+                updateActionPerformed(evt);
             }
         });
 
@@ -115,6 +117,11 @@ public class UpdateStudentPanelView extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
         if (table.getColumnModel().getColumnCount() > 0) {
             table.getColumnModel().getColumn(0).setResizable(false);
@@ -122,6 +129,9 @@ public class UpdateStudentPanelView extends javax.swing.JPanel {
             table.getColumnModel().getColumn(2).setResizable(false);
             table.getColumnModel().getColumn(3).setResizable(false);
         }
+
+        labelId.setForeground(new java.awt.Color(102, 102, 102));
+        labelId.setText(" ID..");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -143,13 +153,13 @@ public class UpdateStudentPanelView extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(clear)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(save))
+                                .addComponent(update))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtGrade))
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -163,9 +173,9 @@ public class UpdateStudentPanelView extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(txtGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelId))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -174,7 +184,7 @@ public class UpdateStudentPanelView extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(clear)
-                    .addComponent(save)
+                    .addComponent(update)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,16 +196,54 @@ public class UpdateStudentPanelView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_saveActionPerformed
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        try {
+            updateStudent();
+            loardTable();
+            clearAllText();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UpdateStudentPanelView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateStudentPanelView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_updateActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         clearAllText();
     }//GEN-LAST:event_clearActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        loardTxtTotextFeilds();
+    }//GEN-LAST:event_tableMouseClicked
+    
+    private void loardTxtTotextFeilds(){
+        String id = (String) table.getValueAt(table.getSelectedRow(), 0);
+        String name = (String) table.getValueAt(table.getSelectedRow(), 1);
+        String address = (String) table.getValueAt(table.getSelectedRow(), 2);
+        int grade  = (int)table.getValueAt(table.getSelectedRow(), 3);
+            
+        labelId.setText(id);
+        txtName.setText(name);
+        txtAddress.setText(address);
+        txtGrade.setText(Integer.toString(grade));
+    }
+    private void updateStudent() throws ClassNotFoundException, SQLException{
+        StudentDto studentdto = new StudentDto(labelId.getText(),
+            txtName.getText(),
+            txtAddress.getText(),
+            Integer.parseInt(txtGrade.getText())
+        );
+
+        boolean resp = studentController.updateStudent(studentdto);
+        if(resp == true){
+            JOptionPane.showMessageDialog(this, "Saved successfully");
+        }else{
+            JOptionPane.showMessageDialog(this, "Save Faild");
+        }
+    }   
     
     private void clearAllText(){
-        txtId.setText("");
+        labelId.setText("");
         txtName.setText("");
         txtAddress.setText("");
         txtGrade.setText("");
@@ -234,11 +282,11 @@ public class UpdateStudentPanelView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton save;
+    private javax.swing.JLabel labelId;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtGrade;
-    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtName;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

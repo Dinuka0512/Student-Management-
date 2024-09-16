@@ -74,4 +74,18 @@ public class StudentModel {
         
         return null;
     }
+    
+    public boolean updateStudent(StudentDto dto) throws ClassNotFoundException, SQLException{
+        String queree = "UPDATE Student SET name = ?, Address = ?, grade = ? WHERE stuId = ?";
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement(queree);
+        
+        statement.setString(1,dto.getName());
+        statement.setString(2,dto.getAddress());
+        statement.setInt(3,dto.getGrade());
+        statement.setString(4,dto.getStudentID());
+        
+        int resp = statement.executeUpdate();
+        return (resp != 0)? true : false;
+    }
 }
