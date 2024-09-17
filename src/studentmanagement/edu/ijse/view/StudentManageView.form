@@ -104,6 +104,7 @@
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
+              <Component id="btnSearchByName" alignment="0" pref="198" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -116,7 +117,9 @@
                   <Component id="btnUpdateStudent" min="-2" pref="42" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnDelete" min="-2" pref="42" max="-2" attributes="0"/>
-                  <EmptySpace pref="135" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnSearchByName" min="-2" pref="42" max="-2" attributes="0"/>
+                  <EmptySpace pref="87" max="32767" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -206,6 +209,20 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Contact - 078 713 5526"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnSearchByName">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Search Student By name"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchByNameActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

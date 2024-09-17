@@ -39,6 +39,7 @@ public class StudentManageView extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        btnSearchByName = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -110,6 +111,15 @@ public class StudentManageView extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Contact - 078 713 5526");
 
+        btnSearchByName.setBackground(new java.awt.Color(102, 102, 102));
+        btnSearchByName.setForeground(new java.awt.Color(255, 255, 255));
+        btnSearchByName.setText("Search Student By name");
+        btnSearchByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchByNameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -124,6 +134,7 @@ public class StudentManageView extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(btnSearchByName, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +146,9 @@ public class StudentManageView extends javax.swing.JFrame {
                 .addComponent(btnUpdateStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSearchByName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
@@ -216,6 +229,16 @@ public class StudentManageView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnSearchByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchByNameActionPerformed
+        try {
+            searchStudentByNamepanel();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StudentManageView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentManageView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSearchByNameActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -223,6 +246,7 @@ public class StudentManageView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddStu;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSearchByName;
     private javax.swing.JButton btnSearchStudent;
     private javax.swing.JButton btnUpdateStudent;
     private javax.swing.JLabel jLabel1;
@@ -265,6 +289,15 @@ public class StudentManageView extends javax.swing.JFrame {
            DeleteStudentPanelView deleteStudent = new DeleteStudentPanelView();
            deleteStudent.setSize(panel.getWidth(), panel.getHeight());
            panel.add(deleteStudent);
+           panel.repaint();
+           panel.revalidate();
+    }
+    
+    public void searchStudentByNamepanel() throws ClassNotFoundException, SQLException{
+        panel.removeAll();
+           SearchStudentByNamePanelView searchStudent = new SearchStudentByNamePanelView();
+           searchStudent.setSize(panel.getWidth(), panel.getHeight());
+           panel.add(searchStudent);
            panel.repaint();
            panel.revalidate();
     }

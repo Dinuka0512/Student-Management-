@@ -38,4 +38,9 @@ public class StudentController {
         boolean resp = studentmodel.deleteStudent(id);
         return resp;
     }
+    
+    public List<StudentDto> searchStudentByName(String name) throws ClassNotFoundException, SQLException{
+        List<StudentDto> dtos = studentmodel.searchStudentByName(name);
+        return dtos;
+    }
 }

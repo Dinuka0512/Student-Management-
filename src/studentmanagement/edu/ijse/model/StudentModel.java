@@ -99,4 +99,30 @@ public class StudentModel {
         int resp = stm.executeUpdate();
         return (resp != 0)? true : false;
     }
+    
+    public List<StudentDto> searchStudentByName(String name) throws ClassNotFoundException, SQLException{
+        String quere = "Select * From Student WHERE name LIKE ?";
+        
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement stm = connection.prepareStatement(quere);
+        
+        stm.setString(1, name + "%");
+        ResultSet res = stm.executeQuery();
+        
+        List<StudentDto> dtos = new ArrayList<>();
+        if(res.next()){
+            while(res.next()){
+            StudentDto dto = new StudentDto(res.getString("stuId"),
+                    res.getString("name"),
+                    res.getString("Address"),
+                    res.getInt("grade")
+            );
+            
+            dtos.add(dto);
+            }
+            
+            return dtos;
+        }
+        return null;
+    }
 }
